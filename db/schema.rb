@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20171120214030) do
 
   create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20171120214030) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name"
     t.string "last_name"
@@ -42,5 +44,4 @@ ActiveRecord::Schema.define(version: 20171120214030) do
     t.string "image"
     t.index ["employee_id"], name: "index_profiles_on_employee_id"
   end
-
 end

@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "employee-management",
+=======
+  "name": "EmployeeManagement",
+>>>>>>> 89d500a3f19c707821585376f6c5f4bffca64840
   "private": true,
   "dependencies": {}
 }
