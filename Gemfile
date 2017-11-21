@@ -16,6 +16,9 @@ gem 'cloudinary'
 gem 'activeadmin'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'whenever', :require => false
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

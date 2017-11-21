@@ -9,44 +9,33 @@
   </head>
 
   <body>
-  	<p class="navbar-text pull-right">
-	<% if employee_signed_in? %>
-		<nav class="navbar navbar-default" role="navigation">
-  		<!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
-  			<div class="container-fluid">
-    			<div class="navbar-header">
-      				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6">
-        				<span class="sr-only">Toggle navigation</span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-      				</button>
-      				<a class="navbar-brand" href="#">Employee Portal</a>
-    			</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-      				<ul class="nav navbar-nav">
-        				<li class="active"><a href="#"><strong><%= current_employee.email %></strong></a></li>
-        				<li><%= link_to 'Edit Account', edit_employee_registration_path%></li>
-        				<li><%= link_to "Logout", destroy_employee_session_path, method: :delete %></li>
-      				
-
-
-      				</ul>
-    			</div><!-- /.navbar-collapse -->
-  			</div>
-		</nav>
-
-	<% else %>
-  		<%= link_to "Sign up", new_employee_registration_path, :class => 'navbar-link'  %> |
-  		<%= link_to "Login", new_employee_session_path, :class => 'navbar-link'  %>
-	<% end %>
-	</p>
   	<% if notice %>
   		<p class="alert alert-success"><%= notice %></p>
-	<% end %>
-	<% if alert %>
+  	<% end %>
+		<% if alert %>
   		<p class="alert alert-danger"><%= alert %></p>
-	<% end %>
-    <%= yield %>
+		<% end %>
+  	<% if employee_signed_in? %>
+			<%= nav_bar fixed: :top, brand: "Employee Portal" do %>
+  			<%= menu_group do %>
+    			<%= menu_item current_employee.email  %>
+      		<%= menu_item 'Edit Account', edit_employee_registration_path%>
+      		<%= menu_item "Logout", destroy_employee_session_path, method: :delete %>
+    		<% end %>
+    	<% end %>
+		<% end %>
+		<%= yield %>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+ 
+    
