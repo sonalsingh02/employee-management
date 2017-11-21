@@ -13,6 +13,9 @@ gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'devise'
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'activeadmin'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'whenever', :require => false
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

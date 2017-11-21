@@ -1,0 +1,2 @@
+module JoiningRemindersHelper
+end

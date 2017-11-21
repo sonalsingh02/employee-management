@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :designation %><br>
-    <%= f.text_field :designation %>
+    <%= f.text_field :designation, :readonly => true%>
   </p>
   <p>
     <%= f.label :date_of_birth %><br>
@@ -21,11 +21,13 @@
   </p>
   <p>
     <%= f.label :email %><br>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, :readonly => true%>
   </p>
   <p>
   	<%= f.label :image %><br>
+    <%= f.hidden_field(:image_cache) %>
   	<%= f.file_field :image %>
+    <%= image_tag @profile.image.thumbnail.url ,:width => 200, :height => 100 if @profile.image%>
   </p>
   <p>
     <%= f.submit %>

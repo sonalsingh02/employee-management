@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-
-
-  root 'home#index'
+  ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  root 'home#index' 
 
   devise_for :employees
   resources :employees, only: [] do

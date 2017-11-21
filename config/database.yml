@@ -14,32 +14,27 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-<<<<<<< HEAD
-  password: root
-  socket: /var/run/mysqld/mysqld.sock
-
-development:
-  <<: *default
-  database: employee-management_development
-=======
   password: admin
-  host: localhost
+  socket: /var/lib/mysql/mysql.sock
+
+#development:
+  #<<: *default
+  #database: employee-management_development
+  #password: admin
+  #host: localhost
 
 development:
   <<: *default
   database: EmployeeManagement_development
->>>>>>> 89d500a3f19c707821585376f6c5f4bffca64840
+  username: root
+  password: admin
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-<<<<<<< HEAD
-  database: employee-management_test
-=======
   database: EmployeeManagement_test
->>>>>>> 89d500a3f19c707821585376f6c5f4bffca64840
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -62,12 +57,6 @@ test:
 #
 production:
   <<: *default
-<<<<<<< HEAD
-  database: employee-management_production
-  username: employee-management
-  password: <%= ENV['EMPLOYEE-MANAGEMENT_DATABASE_PASSWORD'] %>
-=======
   database: EmployeeManagement_production
   username: EmployeeManagement
   password: <%= ENV['EMPLOYEEMANAGEMENT_DATABASE_PASSWORD'] %>
->>>>>>> 89d500a3f19c707821585376f6c5f4bffca64840
