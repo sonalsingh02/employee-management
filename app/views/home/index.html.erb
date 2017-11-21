@@ -1,0 +1,5 @@
+<% if current_employee.profile.nil? %>
+	<%= link_to 'Create Profile', new_employee_profile_path(current_employee) %>
+<% else %> 
+	<%= link_to 'Edit Profile', edit_employee_profile_path(current_employee, current_employee.profile) %>
+<% end %>
