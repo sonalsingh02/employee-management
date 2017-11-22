@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'leaves/index'
+
+  get 'leaves/new'
+
+  get 'leaves/create'
+
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   root 'home#index' 

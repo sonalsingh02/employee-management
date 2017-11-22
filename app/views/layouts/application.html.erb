@@ -7,27 +7,35 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-  	<% if notice %>
-  		<p class="alert alert-success"><%= notice %></p>
-  	<% end %>
-		<% if alert %>
-  		<p class="alert alert-danger"><%= alert %></p>
-		<% end %>
-  	<% if employee_signed_in? %>
-			<%= nav_bar fixed: :top, brand: "Employee Portal" do %>
-  			<%= menu_group do %>
-    			<%= menu_item current_employee.email  %>
-      		<%= menu_item 'Edit Account', edit_employee_registration_path%>
-      		<%= menu_item "Logout", destroy_employee_session_path, method: :delete %>
-    		<% end %>
-    	<% end %>
-		<% end %>
-		<%= yield %>
+<body>
+    <div class = main_box>
+      <div class = "error-box">
+        <% if employee_signed_in? %>
+          </div>
+          <%= render 'layouts/header' %>
+          <div class='notice'>
+            <% if notice %>
+              <p style="width:20%;"class="alert alert-success text-center"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert alert-danger text-center"><%= alert %></p>
+            <% end %>
+            <% if @errors %>
+              <% @errors.each do |message| %>
+                <%= message %>
+              <% end %>
+            <% end %>
+          </div>
+          <%= yield %>
+          <%= render 'layouts/footer' %>
+        <%else %>
+          <%= render 'layouts/messages' %>
+          </div>
+          <%= yield %>
+        <% end %>
+      </div>
   </body>
 </html>
-
 
 
 

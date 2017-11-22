@@ -14,9 +14,9 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: admin
-  socket: /var/lib/mysql/mysql.sock
-
+  password: root
+  #socket: /var/lib/mysql/mysql.sock
+  socket: /run/mysqld/mysqld.sock
 #development:
   #<<: *default
   #database: employee-management_development
@@ -27,7 +27,8 @@ development:
   <<: *default
   database: EmployeeManagement_development
   username: root
-  password: admin
+  #password: admin
+  password: root
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
