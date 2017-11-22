@@ -13,7 +13,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><%= current_employee.email %></li>
             <li><%= link_to 'Edit Account', edit_employee_registration_path %></li>
-            <li><%= link_to 'My Leaves' %></li>
+            <li><%= link_to 'My Leaves', employee_leaves_histories_path(current_employee) %></li>
             <li><%= link_to "LOG OUT", destroy_employee_session_path, method: :delete %></li>
           </ul>
         </div><!--/.nav-collapse -->

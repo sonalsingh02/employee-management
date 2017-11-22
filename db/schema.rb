@@ -66,8 +66,10 @@ ActiveRecord::Schema.define(version: 20171121220754) do
     t.date "end_date"
     t.integer "status"
     t.integer "leaves_taken"
+    t.bigint "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_leaves_histories_on_employee_id"
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

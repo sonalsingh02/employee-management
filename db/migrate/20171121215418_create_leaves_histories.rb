@@ -5,6 +5,7 @@ class CreateLeavesHistories < ActiveRecord::Migration[5.1]
 			t.date :end_date
 			t.integer :status
 			t.integer :leaves_taken
+			t.references :employee
 			t.timestamps
     end
   end

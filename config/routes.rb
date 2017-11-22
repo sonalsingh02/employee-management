@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'leaves/index'
-
-  get 'leaves/new'
-
-  get 'leaves/create'
-
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   root 'home#index' 
@@ -13,5 +7,23 @@ Rails.application.routes.draw do
   resources :employees, only: [] do
   	resources :profiles
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  
+
+  resources :employees do
+    resources :leaves_histories do
+      member do
+      	get :approve_leave
+        get :disapprove_leave
+      end
+    end
+  end
+
+  resources :employees do
+    resources :leaves_histories do
+      collection do
+      	get :show_leaves
+      end
+    end
+  end
 end

@@ -1,0 +1,27 @@
+<div  class="container">
+  <h2>My Leaves History</h2>
+   
+  <li><%= link_to 'Apply Leave', new_employee_leaves_history_path(current_employee) %></li>
+  <table class="table">
+    <thead>
+      <tr>
+      	<th>Start Date</th>
+        <th>End Date</th>
+        <th>No Of Leaves Taken</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <% if @leaves_histories %>
+      <% @leaves_histories.each do |leaves_history| %>
+        <tr>
+          <td><%= leaves_history.start_date %></td>
+          <td><%= leaves_history.end_date %></td>
+          <td><%= leaves_history.leaves_taken %></td>
+          <td><%= leaves_history.status %></td>
+          <td><%= link_to "Cancel", employee_leaves_history_path(current_employee,leaves_history.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>

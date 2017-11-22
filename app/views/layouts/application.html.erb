@@ -8,12 +8,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 <body>
-    <div class = main_box>
-      <div class = "error-box">
+
         <% if employee_signed_in? %>
-          </div>
+         
           <%= render 'layouts/header' %>
-          <div class='notice'>
+          <div class='notice' style="margin-top: 15%">
             <% if notice %>
               <p style="width:20%;"class="alert alert-success text-center"><%= notice %></p>
             <% end %>
@@ -27,13 +26,11 @@
             <% end %>
           </div>
           <%= yield %>
-          <%= render 'layouts/footer' %>
         <%else %>
           <%= render 'layouts/messages' %>
           </div>
           <%= yield %>
         <% end %>
-      </div>
   </body>
 </html>
 
