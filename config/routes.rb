@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       member do
       	get :approve_leave
         get :disapprove_leave
+        get :cancel_leave
       end
     end
   end
@@ -26,4 +27,25 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [] do
+        collection do
+          post :create
+        end
+        collection do
+          get :show
+        end
+      end
+      resources :leaves_histories, only: [] do
+        collection do
+          post :apply
+        end
+        collection do
+          get :show_leaves
+        end
+      end
+    end
+	end
 end

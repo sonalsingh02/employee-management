@@ -19,7 +19,9 @@
           <td><%= leaves_history.end_date %></td>
           <td><%= leaves_history.leaves_taken %></td>
           <td><%= leaves_history.status %></td>
-          <td><%= link_to "Cancel", employee_leaves_history_path(current_employee,leaves_history.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+          <% if leaves_history.status == "pending" %>
+            <td><%= link_to "Cancel", cancel_leave_employee_leaves_history_path(current_employee,leaves_history.id) %></td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>

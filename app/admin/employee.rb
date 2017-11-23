@@ -17,7 +17,7 @@ ActiveAdmin.register Employee do
 	 		column "remember_created_at"
 			column "Actions" do |resource|
 	 			(link_to "View", admin_employee_path(resource)) + " " +
-	  		(link_to "Edit", edit_admin_employee_path(resource)) + " " + (link_to "Delete", admin_employee_path(resource) , method: :delete ) + " " + (link_to "View Applied Leaves", show_leaves_employee_leaves_histories_path(resource))
+	  		(link_to "Edit", edit_admin_employee_path(resource)) + " " + (link_to "Delete", admin_employee_path(resource) , method: :delete ) + " " + (link_to "View Applied Leaves", show_leaves_admin_employee_path(resource))
 	 		end
 	end
 
@@ -32,11 +32,11 @@ ActiveAdmin.register Employee do
 
 	    div :class => "panel" do
 		  h3 "Comments"
-		  if employee.leaves_histories
+		  if employee.leaves_histories.where(status: 2).exists?
 	    	div :class => "panel_contents" do
 	      	div :class => "attributes_table" do
 	        	table do
-	        		employee.leaves_histories.each do |leaves|
+	        		employee.leaves_histories.where(status: 2).each do |leaves|
 		          	tr do
 		            	th do
 		              	"Id"
@@ -56,7 +56,7 @@ ActiveAdmin.register Employee do
 		            end
 		          end
 	            tbody do
-	            	employee.leaves_histories.each do |leaves|
+	            	employee.leaves_histories.where(status: 2).each do |leaves|
 	              	tr do
 	                	td do
 	                  	leaves.id
@@ -71,7 +71,7 @@ ActiveAdmin.register Employee do
 	                  	leaves.leaves_taken
 	                  end
 	                  td do
-	                  	(link_to "Approve", approve_leave_employee_leaves_histories_path(leaves))+ " " +(link_to "Disapprove", disapprove_leave_employee_leaves_histories_path(leaves))
+	                  	(link_to "Approve", approve_leave_employee_leaves_history_path(employee.id, leaves.id))+ " " +(link_to "Disapprove", disapprove_leave_employee_leaves_history_path(employee.id, leaves.id))
 	                  end
 	                end
 	              end
@@ -80,10 +80,9 @@ ActiveAdmin.register Employee do
 	        end
 	      end
 		  else
-		  	h3 "No Leaves Available"
+		  	h3 "No Leaves Requests Available"
 		  end
 		end
-	    redirect_to :action => :show
 	end
 end
 
