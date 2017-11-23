@@ -31,7 +31,7 @@ class Api::V1::ProfilesController < Api::V1::BaseController
         	render json: { status: "Failure", message: leaves_history.errors.full_messages, code: 500 }
       	end
     	else
-      	redirect_to employee_leaves_histories_path, notice: "You dont have enough leaves"
+    		render json: { status: "Failure", message: "You dont have enough leaves", code: 500 }
     	end
     else
       if @errors.length == 1
