@@ -36,13 +36,40 @@ class Api::V1::ProfilesController < Api::V1::BaseController
   end
 
   def show
-
-
+    validate_profile_params_show(profile_params_show) if @errors.empty?
+    if @errors.empty?
+      validated_params = []
+      @profile = []
+      validated_params = profile_params_show
+      #Rails.logger.info("****#{upload_params[:name].strip}*********")
+      validated_params[:id] = validated_params[:id].to_s.strip
+      @profile = Profile.find_by(id: validated_params[:id])
+      if !profile.empty?
+        render json: { status: "Success", message: @profile, code: 200 }
+      else
+        render json: { status: "Failure", message: @profile.errors.full_messages, code: 500 }
+      end
+    else
+      if @errors.length == 1
+        render json: { status: "Failure", message: @errors, code: 500 }
+      else
+        message = ""
+        @errors.each do |e|
+          message += e + ";"
+        end
+        render json: { :status => "Failure", :message => message, :code => 500 }
+      end
+    end
 
   end
 
 
   private
+
+  def profile_params_show
+    params.require(:profile).permit(:id)
+
+  end
 
   def profile_params
     params.require(:profile).permit(:first_name, :last_name, :email, :designation, :date_of_birth, :date_of_joining, :image)
@@ -64,24 +91,31 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     str[/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i]  == str
   end
   
+  def all_letters(str)
+    str[/\A[a-zA-Z\s]+\Z/i]  == str
+  end
+
+  def all_digits(str)
+    str[/\A[0-9\s]+\Z/i]  == str
+  end
 
   def validate_profile_params params
     unless params[:first_name].to_s.strip.empty?
-      if !all_letters_or_digits(params[:name].to_s.strip)
+      if !all_letters(params[:name].to_s.strip)
         @errors << "First Name is invalid"
       end
     else
        @errors << "First Name is empty"
     end
     unless params[:designation].to_s.strip.empty?
-      if !all_letters_or_digits(params[:designation].to_s.strip)
+      if !all_letters(params[:designation].to_s.strip)
         @errors << "Designation is invalid"
       end
     else
        @errors << "Designation is empty"
     end
     unless params[:last_name].to_s.strip.empty?
-      if !all_letters_or_digits(params[:last_name].to_s.strip)
+      if !all_letters(params[:last_name].to_s.strip)
         @errors << "Last Name is invalid"
       end
     else
@@ -114,6 +148,17 @@ class Api::V1::ProfilesController < Api::V1::BaseController
       end
     else
        @errors << "Image Url is empty"
+    end
+  end
+
+
+  def validate_profile_params_show params
+    unless params[:id].to_s.strip.empty?
+      if !all_digits(params[:id].to_s.strip)
+        @errors << "Id is invalid"
+      end
+    else
+       @errors << "id is empty"
     end
   end
 

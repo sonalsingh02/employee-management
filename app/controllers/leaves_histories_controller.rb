@@ -10,7 +10,6 @@ class LeavesHistoriesController < ApplicationController
   end
 
   def create
-    byebug
   	@employee = Employee.find_by(id: params[:employee_id])
     @leaves_history = @employee.leaves_histories.build(leaves_history_params)
   	@total_days = (@leaves_history.end_date.to_date - @leaves_history.start_date.to_date).to_i
