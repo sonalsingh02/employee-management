@@ -1,9 +1,9 @@
 #apply and can see applied leaves
 
-class Api::V1::ProfilesController < Api::V1::BaseController
-  skip_before_action :verify_authenticity_token, only: [:create, :show]
+class Api::V1::LeavesHistoriesController < Api::V1::BaseController
+  skip_before_action :verify_authenticity_token, only: [:create_leave, :show_leaves]
 
-  def create
+  def create_leave
     @errors = []
     check_key
     validate_leaves_history_params(leaves_history_params) if @errors.empty?
@@ -28,7 +28,7 @@ class Api::V1::ProfilesController < Api::V1::BaseController
 	      if @leaves_history.save
 	     		render json: { status: "Success", message: "Leaves applied successfully", code: 200 }
 	     	else
-        	render json: { status: "Failure", message: leaves_history.errors.full_messages, code: 500 }
+        	render json: { status: "Failure", message: @leaves_history.errors.full_messages, code: 500 }
       	end
     	else
     		render json: { status: "Failure", message: "You dont have enough leaves", code: 500 }
@@ -46,19 +46,25 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     end
   end
 
-  def show
-    validate_profile_params_show(profile_params_show) if @errors.empty?
+  def show_leaves
+    #byebug
+    @errors = []
+    validate_leaves_history_params_show(params) if @errors.empty?
+    
     if @errors.empty?
       validated_params = []
-      @profile = []
-      validated_params = profile_params_show
-      #Rails.logger.info("****#{upload_params[:name].strip}*********")
-      validated_params[:id] = validated_params[:id].to_s.strip
-      @profile = Profile.find_by(id: validated_params[:id])
-      if !profile.empty?
-        render json: { status: "Success", message: @profile, code: 200 }
+      @employee = []
+      params[:employee_id] = params[:employee_id].to_s.strip
+      @employee = Employee.find_by(id: params[:employee_id])
+      if !@employee.nil?
+        @leaves_histories = @employee.leaves_histories.all
+        if !@leaves_histories.empty?
+          render json: { status: "Success", message: @leaves_histories, code: 200 }
+        else
+          render json: { status: "Failure", message: "No Leaves Found", code: 500 }
+        end
       else
-        render json: { status: "Failure", message: @profile.errors.full_messages, code: 500 }
+        render json: { status: "Failure", message: "Wrong Employee Id", code: 200 }
       end
     else
       if @errors.length == 1
@@ -71,7 +77,6 @@ class Api::V1::ProfilesController < Api::V1::BaseController
         render json: { :status => "Failure", :message => message, :code => 500 }
       end
     end
-
   end
 
 
@@ -81,24 +86,8 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     params.require(:leaves_history).permit(:employee_id,:start_date, :end_date)
   end
 
-  def all_letters_or_digits(str)
-    str[/\A[a-zA-Z0-9\s]+\Z/i]  == str
-  end
-
-  def validate_email(str)
-    str[/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i]  == str
-  end
-
   def validate_date(str)
     str[/\A[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/i]  == str
-  end
-
-  def validate_image(str)
-    str[/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i]  == str
-  end
-  
-  def all_letters(str)
-    str[/\A[a-zA-Z\s]+\Z/i]  == str
   end
 
   def all_digits(str)
@@ -130,9 +119,9 @@ class Api::V1::ProfilesController < Api::V1::BaseController
   end
 
 
-  def validate_profile_params_show params
-    unless params[:id].to_s.strip.empty?
-      if !all_digits(params[:id].to_s.strip)
+  def validate_leaves_history_params_show params
+    unless params[:employee_id].to_s.strip.empty?
+      if !all_digits(params[:employee_id].to_s.strip)
         @errors << "Id is invalid"
       end
     else
@@ -141,7 +130,7 @@ class Api::V1::ProfilesController < Api::V1::BaseController
   end
 
   def check_key
-    if(!params.has_key?(:id))
+    if(!params.has_key?(:employee_id))
         @errors << "Id key is missing"
     end
   end

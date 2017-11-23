@@ -30,17 +30,17 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :profiles, only: [] do
+      resources :profiles do
         collection do
-          post :create
+          post :create_profile
         end
         collection do
-          get :show
+          get :show_profile
         end
       end
-      resources :leaves_histories, only: [] do
+      resources :leaves_histories do
         collection do
-          post :apply
+          post :create_leave
         end
         collection do
           get :show_leaves

@@ -1,26 +1,23 @@
 class Api::V1::ProfilesController < Api::V1::BaseController
-  skip_before_action :verify_authenticity_token, only: [:create, :show]
+  skip_before_action :verify_authenticity_token, only: [:create_profile, :show_profile]
 
-  def create
+  def create_profile
     @errors = []
     #check_key
-    validate_profile_params(profile_params) if @errors.empty?
+    validate_profile_params(params) if @errors.empty?
     if @errors.empty?
-      validated_params = [] 
-      validated_params = profile_params
-      #Rails.logger.info("****#{upload_params[:name].strip}*********")
-      validated_params[:first_name] = validated_params[:first_name].to_s.strip
-      validated_params[:last_name] = validated_params[:last_name].to_s.strip
-      validated_params[:email] = validated_params[:email].to_s.strip
-      validated_params[:designation] = validated_params[:designation].to_s.strip
-      validated_params[:date_of_birth] = validated_params[:date_of_birth].to_s.strip
-      validated_params[:date_of_joining] = validated_params[:date_of_joining].to_s.strip
-      validated_params[:image] = validated_params[:image].to_s.strip
-      profile = Profile.new(validated_params)
-      if profile.save
+      params[:first_name] = params[:first_name].to_s.strip
+      params[:last_name] = params[:last_name].to_s.strip
+      params[:email] = params[:email].to_s.strip
+      params[:designation] = params[:designation].to_s.strip
+      params[:date_of_birth] = params[:date_of_birth].to_s.strip
+      params[:date_of_joining] = params[:date_of_joining].to_s.strip
+      params[:image] = params[:image].to_s.strip
+      @profile = Profile.new(params)
+      if @profile.save
         render json: { status: "Success", message: "Profile created successfully", code: 200 }
       else
-        render json: { status: "Failure", message: profile.errors.full_messages, code: 500 }
+        render json: { status: "Failure", message: @profile.errors.full_messages, code: 500 }
       end
     else
       if @errors.length == 1
@@ -35,19 +32,22 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     end
   end
 
-  def show
-    validate_profile_params_show(profile_params_show) if @errors.empty?
+  def show_profile
+    @errors = []
+    validate_profile_params_show(params) if @errors.empty?
     if @errors.empty?
       validated_params = []
       @profile = []
-      validated_params = profile_params_show
-      #Rails.logger.info("****#{upload_params[:name].strip}*********")
-      validated_params[:id] = validated_params[:id].to_s.strip
-      @profile = Profile.find_by(id: validated_params[:id])
-      if !profile.empty?
-        render json: { status: "Success", message: @profile, code: 200 }
+      params[:customer_id] = params[:customer_id].to_s.strip
+      @profile = Profile.find_by(customer_id: params[:customer_id])
+      if !@profile.nil?
+        if !@profile.empty?
+          render json: { status: "Success", message: @profile, code: 200 }
+        else
+          render json: { status: "Failure", message: "No Records Found", code: 500 }
+        end
       else
-        render json: { status: "Failure", message: @profile.errors.full_messages, code: 500 }
+        render json: { status: "Failure", message: "Wrong Employee Id", code: 200 }
       end
     else
       if @errors.length == 1
@@ -66,11 +66,7 @@ class Api::V1::ProfilesController < Api::V1::BaseController
 
   private
 
-  def profile_params_show
-    params.require(:profile).permit(:id)
-
-  end
-
+  
   def profile_params
     params.require(:profile).permit(:first_name, :last_name, :email, :designation, :date_of_birth, :date_of_joining, :image)
   end

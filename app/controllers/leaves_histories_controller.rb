@@ -58,16 +58,16 @@ class LeavesHistoriesController < ApplicationController
   def approve_leave
     @employee = Employee.find_by(id: params[:employee_id])
     @employee_leaves_data = @employee.leaves_histories.find_by(id: params[:id])
-    @profile = Profile.find_by(employee_id: params[:employee_id])
+    @profile = Profile.find_by(employee_id: params[:employee_id]) 
     @total_leaves_taken = 0
-    #@employee_leaves_data.each do |employee_leaves_row|
-      #@total_leaves_taken = @total_leaves_taken + employee_leaves_row.leaves_taken
-    #end
-    byebug
     remaining_leaves_balance = @employee.leaves_balance - @employee_leaves_data.leaves_taken
     @employee.update_attributes(leaves_balance: remaining_leaves_balance)
     @employee_leaves_data.update_attributes(status: 0)
-    AdminMailer.send_leave_response(@employee,@employee_leaves_data.status,@profile.first_name).deliver
+    if @profile
+        AdminMailer.send_leave_response(@employee,@employee_leaves_data.status,@profile.first_name).deliver
+    else
+      AdminMailer.send_leave_response(@employee,@employee_leaves_data.status,"").deliver
+    end 
     redirect_to show_leaves_admin_employee_path(params[:employee_id])
     # mail sent to employee for approval
   end
@@ -78,7 +78,11 @@ class LeavesHistoriesController < ApplicationController
     @profile = Profile.find_by(employee_id: params[:employee_id])
     @employee_leaves_data.update_attributes(status: 1)
     # mail sent to employee for disapproval
-    AdminMailer.send_leave_response(@employee,@employee_leaves_data.status,@profile.first_name).deliver
+    if @profile
+      AdminMailer.send_leave_response(@employee,@employee_leaves_data.status,@profile.first_name).deliver
+    else
+      AdminMailer.send_leave_response(@employee,@employee_leaves_data.status,"").deliver
+    end
     redirect_to show_leaves_admin_employee_path(params[:employee_id])
   end
 

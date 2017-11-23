@@ -1,5 +1,46 @@
-<% if current_employee.profile.nil? %>
-	<%= link_to 'Create Profile', new_employee_profile_path(current_employee) %>
-<% else %> 
-	<%= link_to 'Edit Profile', edit_employee_profile_path(current_employee, current_employee.profile) %>
-<% end %>
+
+	
+	<main role="main">
+
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+          <h1>Welcome <%= current_employee.email%> </h1> 
+          <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+					<% if current_employee.profile.nil? %>
+            <%= link_to 'Create Profile', new_employee_profile_path(current_employee), :class => "btn btn-lg btn-success" %>
+          <% else %> 
+            <%= link_to 'Edit Profile', edit_employee_profile_path(current_employee, current_employee.profile), :class => "btn btn-lg btn-success" %>
+          <% end %>
+       
+          <!--<p><a class="btn btn-lg btn-success" href="#" role="button">Create Profile</a></p>-->
+        </div>
+
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-lg-4">
+            <h2>Birthday</h2>
+            <p> Your Birthday : <%= @date_of_birth %></p>
+            <!--=<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+          </div>
+          <div class="col-lg-4">
+            <h2>Joining</h2>
+            <p> Your Date Of Joining : <%= @date_of_joining %></p>
+            <!--<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+          </div>
+          <div class="col-lg-4">
+          	<h2>Leaves Status</h2>
+          	<% if !@leaves_status.nil? %>
+        			<p>Your leaves starting from <b><%= @leaves_start_date %></b> and ending on <b><%= @leaves_start_date %></b> is <%= @leaves_status%></p>
+            	<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+           <% else %>
+            	<p>No Leaves Applied</p>
+            <% end %>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; Company 2017</p>
+      </footer>

@@ -15,12 +15,12 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'activeadmin'
 gem 'whenever', :require => false
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass'
+gem 'sass-rails'
 gem 'jquery-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
