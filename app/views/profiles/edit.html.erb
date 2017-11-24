@@ -1,36 +1,37 @@
-<%= form_for([@employee, @profile]) do |f| %>
-  <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </p>
-  <p>
-    <%= f.label :designation %><br>
-    <%= f.text_field :designation, :readonly => true%>
-  </p>
-  <p>
-    <%= f.label :date_of_birth %><br>
-    <%= f.date_field :date_of_birth %>
-  </p>
-  <p>
-    <%= f.label :date_of_joining %><br>
-    <%= f.date_field :date_of_joining %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email, :readonly => true%>
-  </p>
-  <p>
-  	<%= f.label :image %><br>
-    <%= f.hidden_field(:image_cache) %>
-  	<%= f.file_field :image %>
-    <%= image_tag @profile.image.thumbnail.url ,:width => 200, :height => 100 if @profile.image%>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-<%= link_to 'Back', root_path %>
+<div class="container">
+	<%= form_for([@employee, @profile], :html => {:class => 'form-signin'}) do |f| %>
+		<h2 class="form-signin-heading">Please sign in</h2>
+	  <div class="form-group">
+	    <%= f.label :first_name, :class => "sr-only" %><br>
+	    <%= f.text_field :first_name, :class => "form-control",  autofocus: true %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :last_name, :class => "sr-only" %><br>
+	    <%= f.text_field :last_name, :class => "form-control",  autofocus: true %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :designation, :class => "sr-only" %><br>
+	    <%= f.text_field :designation, :class => "form-control",  autofocus: true, :readonly => true %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :date_of_birth, :class => "sr-only" %><br>
+	    <%= f.date_field :date_of_birth %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :date_of_joining, :class => "sr-only" %><br>
+	    <%= f.date_field :date_of_joining %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :email, :class => "sr-only" %><br>
+	    <%= f.email_field :email, :class => "form-control", autofocus: true ,:readonly => true %>
+	  </div>
+	  <div class="form-group">
+	  	<%= f.label :image, :class => "sr-only" %><br>
+	    <%= f.hidden_field(:image_cache) %>
+	  	<%= f.file_field :image %>
+	    <%= image_tag @profile.image.thumbnail.url ,:width => 200, :height => 100 if @profile.image %>
+	  </div>
+	  <%= f.submit "Create Profile", :class => "btn btn-lg btn-primary btn-block" %>
+	<% end %>
+	<%= link_to 'Back', root_path %>
+</div>

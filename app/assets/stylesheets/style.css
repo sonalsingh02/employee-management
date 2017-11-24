@@ -43,11 +43,11 @@ body {
 }
 
 .footer {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-top: 40px;
-  border-top: 1px solid #eee;
-}
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 47%;
+    border-top: 1px solid #eee;
+  }
 
 /* Main marketing message and sign up button */
 .jumbotron {

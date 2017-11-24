@@ -1,7 +1,6 @@
 <div  class="container">
   <h2>My Leaves History</h2>
-   
-  <li><%= link_to 'Apply Leave', new_employee_leaves_history_path(current_employee) %></li>
+  <%= link_to 'Apply Leave', new_employee_leaves_history_path(current_employee) ,:class => "btn btn-lg btn-success btn-block", :style => "width:12%;margin-left:80%;" %>
   <table class="table">
     <thead>
       <tr>

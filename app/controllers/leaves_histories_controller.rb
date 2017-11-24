@@ -12,14 +12,9 @@ class LeavesHistoriesController < ApplicationController
   def create
   	@employee = Employee.find_by(id: params[:employee_id])
     @leaves_history = @employee.leaves_histories.build(leaves_history_params)
-  	@total_days = (@leaves_history.end_date.to_date - @leaves_history.start_date.to_date).to_i
+  	@total_days = (@leaves_history.end_date.to_date - @leaves_history.start_date.to_date).to_i + 1
     if (@employee.leaves_balance - @total_days).to_i >= 0 #employee can take leave
-      @leaves_history.leaves_taken = @total_days
-      if @total_days != 0
-        @leaves_history.update_attributes(:status => 2, :leaves_taken => @total_days)
-      else
-         @leaves_history.update_attributes(:status => 2, :leaves_taken => 1)
-      end 
+      @leaves_history.update_attributes(:status => 2, :leaves_taken => @total_days)
       decrease_leave_balance(@employee,@leaves_history) if @leaves_history.status == "approved"
       @leaves_history.save
       redirect_to employee_leaves_histories_path, notice: "Request sent to admin for approval"
