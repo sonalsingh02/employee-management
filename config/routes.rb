@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :employees
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   root 'home#index' 
 
-  devise_for :employees
   resources :employees, only: [] do
   	resources :profiles
   end

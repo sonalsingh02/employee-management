@@ -85,8 +85,3 @@ ActiveAdmin.register Employee do
 		end
 	end
 end
-
-
-
-
-
