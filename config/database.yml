@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: admin
-  socket: /var/lib/mysql/mysql.sock
+  #socket: /var/lib/mysql/mysql.sock
   #socket: /run/mysqld/mysqld.sock
 #development:
   #<<: *default
@@ -29,6 +29,8 @@ development:
   username: root
   #password: admin
   password: admin
+  socket: /var/lib/mysql/mysql.sock
+  #socket: /run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -61,3 +63,4 @@ production:
   database: EmployeeManagement_production
   username: EmployeeManagement
   password: <%= ENV['EMPLOYEEMANAGEMENT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
