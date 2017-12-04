@@ -13,15 +13,6 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: admin
-  #socket: /var/lib/mysql/mysql.sock
-  #socket: /run/mysqld/mysqld.sock
-#development:
-  #<<: *default
-  #database: employee-management_development
-  #password: admin
-  #host: localhost
 
 development:
   <<: *default
@@ -59,8 +50,6 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: EmployeeManagement_production
-  username: EmployeeManagement
-  password: <%= ENV['EMPLOYEEMANAGEMENT_DATABASE_PASSWORD'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+   <<: *default
+   adapter: postgresql
+   database: db/production.sqlite3
