@@ -31,7 +31,8 @@
 	  	<%= f.file_field :image %>
 	    <%= image_tag @profile.image.thumbnail.url ,:width => 200, :height => 100 if @profile.image%>
 	  </div>
-		 <%= f.submit, :class => "btn btn-lg btn-primary btn-block" %>
+		 
+     <%= f.submit nil, class: 'btn btn-lg btn-primary btn-block' %>
 	<% end %>
 	<%= link_to 'Back', root_path %>
 </div>
