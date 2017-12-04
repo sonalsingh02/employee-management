@@ -11,23 +11,21 @@
 	  <% if employee_signed_in? %>
 	    <div class="container">
 	    	<%= render 'layouts/header' %>         
-	      <div class='notice'>
-          <% if notice %>
-            <p style="width:20%;"class="alert alert-success text-center"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="alert alert-danger text-center"><%= alert %></p>
+	       <% if flash %>
+            <%= render 'layouts/messages' %>
           <% end %>
           <% if @errors %>
             <% @errors.each do |message| %>
               <%= message %>
             <% end %>
           <% end %>
-	      </div>
+	      
 	      <%= yield %>
 	    </div>
-    <%else %>
-    	<%= render 'layouts/messages' %>
+    <% else %>
+      <% if flash %>
+        <%= render 'layouts/messages' %>
+      <% end %>
       <%= yield %>
     <% end %>
 	  <div class="container">

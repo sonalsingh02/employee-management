@@ -82,6 +82,87 @@ body {
     color: rgba(0,0,0,.9);
 }
 
+.alert-success hr {
+  border-top-color: #c9e2b3;
+}
+/* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-success .alert-link {
+  color: #2b542c;
+}
+
+/* line 63, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_alerts.scss */
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #31708f;
+}
+/* line 8, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-info hr {
+  border-top-color: #a6e1ec;
+}
+/* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-info .alert-link {
+  color: #245269;
+}
+
+/* line 67, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_alerts.scss */
+.alert-warning {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+}
+/* line 8, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+/* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-warning .alert-link {
+  color: #66512c;
+}
+
+/* line 71, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_alerts.scss */
+.alert-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+/* line 8, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+/* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-danger .alert-link {
+  color: #843534;
+}
+
+.alert-notice {
+  background-color: #c9e2b3;
+  border-color: #c9e2b3;
+  color: #31708f;
+}
+/* line 8, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-notice hr {
+  border-top-color: #a6e1ec;
+}
+/* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-notice .alert-link {
+  color: #245269;
+}
+
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+/* line 8, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-alert hr {
+  border-top-color: #e4b9c0;
+}
+/* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
+.alert-alert .alert-link {
+  color: #843534;
+}
+
 @media (min-width: 768px) {
   .navbar-nav {
     display: -ms-flexbox;
