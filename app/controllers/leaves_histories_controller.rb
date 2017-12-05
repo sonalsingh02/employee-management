@@ -26,7 +26,7 @@ class LeavesHistoriesController < ApplicationController
   def cancel_leave
     @employee = Employee.find_by(id: params[:employee_id])
     @leaves_history = @employee.leaves_histories.find_by(id: params[:id])
-    @leaves_history.update_attribute(status: 4)
+    @leaves_history.update_attributes(status: 3)
     redirect_to employee_leaves_histories_path, notice: "You cancelled the request"
   end
 
