@@ -13,13 +13,21 @@
 		  	<div class="col-lg-4">
 		  		<div class="panel panel-success">
 						<div class="panel-heading">Birthday</div>
-  					<div class="panel-body"><p> Your Birthday : <%= @date_of_birth %></p></div>
+  					<div class="panel-body">
+  						<% if @date_of_birth %>
+  							<p> Your Birthday : <%= @date_of_birth %></p>
+  						<% end %>  
+  					</div>
 					</div>
 		  	</div>
 		  	<div class="col-lg-4">
 		    	<div class="panel panel-success">
 						<div class="panel-heading">Joining</div>
-  					<div class="panel-body"><p> Your Date Of Joining : <%= @date_of_joining %></p></div>
+  					<div class="panel-body">
+  						<% if @date_of_joining %>
+  							<p> Your Date Of Joining : <%= @date_of_joining %></p>
+  						<% end %>
+  					</div>
 					</div>
 		  	</div>
 		  	<div class="col-lg-4">
