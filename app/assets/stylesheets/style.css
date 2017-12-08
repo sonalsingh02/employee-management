@@ -5,7 +5,7 @@ body {
 }
 
 .form-signin {
-  max-width: 330px;
+  max-width: 84%;
   padding: 15px;
   margin: 0 auto;
 }
@@ -161,6 +161,35 @@ body {
 /* line 11, /usr/local/rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_alerts.scss */
 .alert-alert .alert-link {
   color: #843534;
+}
+
+
+#profile_pic {
+  position: relative;
+  background-color: #F0F0F0;
+  border: none;
+  font-size: 19px;
+  padding: 14px;
+  width: 32%;
+  margin-left: 73%;
+  text-align: center;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+div.form-group .sr-only {
+    position: relative;
+    width: auto !important; 
+    height: 0px !important;
+    margin: 0px !important;
+    padding: 0 !important;
+    overflow: visible !important; 
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
 }
 
 @media (min-width: 768px) {

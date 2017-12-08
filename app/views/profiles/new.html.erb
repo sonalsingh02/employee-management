@@ -1,6 +1,13 @@
 <div class="container">
 	<%= form_for([@employee, @profile], :html => {:class => 'form-signin'}) do |f| %>
 		<h2 class="form-signin-heading">Please sign in</h2>
+			<div class="form-group">
+		 		<button id = "profile_pic">
+		 			<%= f.hidden_field(:image_cache) %>
+	  			<%= f.file_field :image %>
+	    		<%= image_tag @profile.image.thumbnail.url ,:width => 200, :height => 100 if @profile.image%>
+		 		</button>
+	  	</div>
 	  <div class="form-group">
 	    <%= f.label :first_name, :class => "sr-only" %><br>
 	    <%= f.text_field :first_name, :class => "form-control",  autofocus: true %>
@@ -25,12 +32,12 @@
 	    <%= f.label :email, :class => "sr-only" %><br>
 	    <%= f.email_field :email, :class => "form-control", autofocus: true %>
 	  </div>
-	  <div class="form-group">
+	  <!--<div class="form-group">
 	  	<%= f.label :image, :class => "sr-only" %><br>
 	    <%= f.hidden_field(:image_cache) %>
 	  	<%= f.file_field :image %>
 	    <%= image_tag @profile.image.thumbnail.url ,:width => 200, :height => 100 if @profile.image%>
-	  </div>
+	  </div>-->
 		 
      <%= f.submit nil, class: 'btn btn-lg btn-primary btn-block' %>
 	<% end %>
