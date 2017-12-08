@@ -4,14 +4,14 @@
     <h2 class="form-signin-heading">Edit <%= resource_name.to_s.humanize %></h2>
     <div class="form-group">
       <%= f.label :email, :class => "sr-only" %><br />
-      <%= f.email_field :email, autofocus: true %>
+      <%= f.email_field :email ,:class => "form-control", required: true  %>
     </div>
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
     <div class="form-group">
       <%= f.label :password, :class => "sr-only" %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "off" %>
+      <%= f.password_field :password,:class => "form-control", autocomplete: "off", required: true %>
       <% if @minimum_password_length %>
         <br />
         <em><%= @minimum_password_length %> characters minimum</em>
